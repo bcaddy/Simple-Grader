@@ -58,6 +58,7 @@ def main():
         # save the grades to a .csv file
         grades.to_csv(savepath, index=False)
 
+
 # =============================================================================
 #
 # =============================================================================
@@ -99,20 +100,48 @@ def Assignment_Info():
     """Finds and returns the min and max values for the grade of a given assignemnt.
        Also tests for data type conformation"""
 
-    # get the assignment name and check if the assignment exists
+    ###### print the list of assignments and prompt the user to choose one to grade #####
+    headers = grades.columns.values #find all the column headers
+
+    # this loop prints out the names of each of the assignments
+    print('\nList of assignments:')
+    for head in headers:
+        if '[Total' in head:
+            print(head)
+
+
+    # prompot the user to choose an assignment
     while True:
         try:
-            assignment = input('\nInput the name of the assignment to be graded, type {exit} when done\n ')
+            # get the assignment index from user
+            assignment_index = str(input('Please input the name of the assigment you wish to grade, type {exit} when done:\n'))
 
-            # return exit code if the user wants to exit
-            if assignment.lower() == '{exit}':
-                return assignment.lower(), 0, 0
+            # exit when the user is done grading
+            if assignment_index == '{exit}':
+                return assignment_index.lower(), 0, 0
 
-            grades[assignment] # this is the actual line that will throw an error if the assignment doesn't exist
-            break
-        except KeyError:
-            print('\nAssignment does not exist.  Please try again')
+            # get the name of the assignment
+            for head in headers:
+                if assignment_index.lower() in head.lower():
+                    assignment = head
+                    break
 
+            # ask the user if they chose the correct assignment
+            check = str(input(f'You have chose to grade {assignment}.  Is that correct? (y/n): '))
+
+            # check if it is the correct assignment
+            if check.lower() in ('y', 'yes'):
+                break
+            else:
+                del assignment
+                continue
+
+        except (ValueError, UnboundLocalError):
+            print('\nInvalid input.  Please input an integer corrosponding to an assignment')
+
+
+
+    ##### Get the grade ranges #####
 
     # get the minimum grade and check for non float values of input
     while True:
