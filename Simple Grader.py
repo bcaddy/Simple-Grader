@@ -50,10 +50,14 @@ def main():
 
         ##### end of student loop #####
 
-        # Give zeroes to all ungraded students for this assignment
-        for i in range(len(grades)):
-            if isnan(grades.at[i, assignment]):
-                grades.at[i, assignment] = 0
+        # Let the user choose whether or not to give zeroes to all ungraded 
+        # students for this assignment
+        zeroes_choice = input('Do you want to give all ungraded students zeroes?'
+                              ' (y/n): ')
+        if zeroes_choice.lower() == 'y': 
+            for i in range(len(grades)):
+                if isnan(grades.at[i, assignment]):
+                    grades.at[i, assignment] = 0
 
         # save the grades to a .csv file
         grades.to_csv(savepath, index=False)
@@ -69,7 +73,7 @@ def File_Reader():
 
     while True:
         # get the path to the file
-        inputpath = input('\nWhat is the path to the file? ')
+        inputpath = input('\nWhat is the path to the file? ').rstrip()
 
         # read in the grades and declare the grades variable to be global so all functions can access it
         try:
@@ -252,23 +256,28 @@ def Grader(student_index, assignment, graderange_min, graderange_max):
     # Prompt the user for the grade and check if it's within the range
     while True:
         new_grade = input(f'{a}{b}{c}')
+        
+        if len(new_grade) > 0:
+    
+            try:
+                new_grade = float(new_grade)
+            except ValueError:
+                print('\nNon numerical value input.  Please try again')
+                continue
 
-        try:
-            new_grade = float(new_grade)
-        except ValueError:
-            print('\nNon numerical value input.  Please try again')
-            continue
-
-
-        # check if the grade is in the right range
-        if graderange_min <= new_grade <= graderange_max:
-            # assign the grade to the student
-            grades.at[student_index, assignment] = new_grade
-
-            break
+    
+            # check if the grade is in the right range
+            if graderange_min <= new_grade <= graderange_max:
+                # assign the grade to the student
+                grades.at[student_index, assignment] = new_grade
+    
+                break
+            else:
+                print('\nEntry out of range, try again')
+                continue
         else:
-            print('\nEntry out of range, try again')
-            continue
+            print('Student not graded')
+            break
 
 # =============================================================================
 #
