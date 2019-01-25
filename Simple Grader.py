@@ -50,11 +50,11 @@ def main():
 
         ##### end of student loop #####
 
-        # Let the user choose whether or not to give zeroes to all ungraded 
+        # Let the user choose whether or not to give zeroes to all ungraded
         # students for this assignment
-        zeroes_choice = input('Do you want to give all ungraded students zeroes?'
+        zeroes_choice = input('\nDo you want to give all ungraded students zeroes?'
                               ' (y/n): ')
-        if zeroes_choice.lower() == 'y': 
+        if zeroes_choice.lower() == 'y':
             for i in range(len(grades)):
                 if isnan(grades.at[i, assignment]):
                     grades.at[i, assignment] = 0
@@ -256,21 +256,21 @@ def Grader(student_index, assignment, graderange_min, graderange_max):
     # Prompt the user for the grade and check if it's within the range
     while True:
         new_grade = input(f'{a}{b}{c}')
-        
+
         if len(new_grade) > 0:
-    
+
             try:
                 new_grade = float(new_grade)
             except ValueError:
                 print('\nNon numerical value input.  Please try again')
                 continue
 
-    
+
             # check if the grade is in the right range
             if graderange_min <= new_grade <= graderange_max:
                 # assign the grade to the student
                 grades.at[student_index, assignment] = new_grade
-    
+
                 break
             else:
                 print('\nEntry out of range, try again')
