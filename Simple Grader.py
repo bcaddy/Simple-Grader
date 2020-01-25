@@ -52,8 +52,8 @@ def main():
 
         # Let the user choose whether or not to give zeroes to all ungraded
         # students for this assignment
-        zeroes_choice = input('\nDo you want to give all ungraded students zeroes?'
-                              ' (y/n): ')
+        zeroes_choice = str(input('\nDo you want to give all ungraded students zeroes?'
+                                  ' (y/n): '))
         if zeroes_choice.lower() == 'y':
             for i in range(len(grades)):
                 if isnan(grades.at[i, assignment]):
@@ -73,7 +73,7 @@ def File_Reader():
 
     while True:
         # get the path to the file
-        inputpath = input('\nWhat is the path to the file? ').rstrip()
+        inputpath = str(input('\nWhat is the path to the file? ')).rstrip()
 
         # read in the grades and declare the grades variable to be global so all functions can access it
         try:
@@ -84,7 +84,7 @@ def File_Reader():
 
     while True:
         # get the path to save the file to
-        savepath = input('\nPlease input the save path: ')
+        savepath = str(input('\nPlease input the save path: ')).rstrip()
 
         # check to see if the path exists
         try:
@@ -176,7 +176,7 @@ def Student_Finder():
     # get students name from the user and determine if that student exists
     while True:
         # get the name of the student
-        last_name = input('\nPlease input the last name of the student, type {exit} when done\n')
+        last_name = str(input('\nPlease input the last name of the student, type {exit} when done\n'))
 
         # return exit condition and exit if the user is done grading students
         if last_name.lower() == '{exit}':
@@ -202,7 +202,7 @@ def Student_Finder():
 
         # make sure the user puts the name in correctly
         while True:
-            first_name = input('first name: ')
+            first_name = str(input('first name: '))
 
             # find the student
             temp = Student_Searcher(first_name, student, 'First Name')
@@ -255,7 +255,7 @@ def Grader(student_index, assignment, graderange_min, graderange_max):
 
     # Prompt the user for the grade and check if it's within the range
     while True:
-        new_grade = input(f'{a}{b}{c}')
+        new_grade = float(input(f'{a}{b}{c}'))
 
         if len(new_grade) > 0:
 
