@@ -47,6 +47,9 @@ def main():
 
             # grade the student
             Grader(student_index, assignment, graderange_min, graderange_max)
+            
+            # save the grades to a .csv file
+            grades.to_csv(savepath, index=False)
 
         ##### end of student loop #####
 
@@ -59,8 +62,6 @@ def main():
                 if isnan(grades.at[i, assignment]):
                     grades.at[i, assignment] = 0
 
-        # save the grades to a .csv file
-        grades.to_csv(savepath, index=False)
 
 
 # =============================================================================
@@ -258,7 +259,7 @@ def Grader(student_index, assignment, graderange_min, graderange_max):
 
     # Prompt the user for the grade and check if it's within the range
     while True:
-        new_grade = float(input(f'{a}{b}{c}'))
+        new_grade = str(input(f'{a}{b}{c}'))
 
         if len(new_grade) > 0:
 
