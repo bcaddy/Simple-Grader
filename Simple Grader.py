@@ -84,7 +84,10 @@ def File_Reader():
 
     while True:
         # get the path to save the file to
-        savepath = str(input('\nPlease input the save path: ')).rstrip()
+        savepath = str(input('\nPlease input the save path (defaults next to '
+                            'input file with _new added to filename): ')).rstrip()
+        if (len(savepath) == 0):
+            savepath =  inputpath[:-4] + '_new' + inputpath[-4:]
 
         # check to see if the path exists
         try:
