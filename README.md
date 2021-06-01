@@ -1,3 +1,6 @@
+# WARNING
+This project is archived. It might still work, it might not. If you're interested in it let me know
+
 # Simple-Grader
 This is a python program to help instructors with large classes input grades for assignments
 quickly and easily.  It's designed to work with the University of Pittsburgh's Courseweb/Blackboard
